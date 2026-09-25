@@ -1,5 +1,7 @@
 # 🧩 Prognosekombination – viele Prognosen zu einer
 
+**[→ Demo live ausprobieren](https://sebastianhanisch-forecast-combination-demo.streamlit.app/)**
+
 Neuntes Stück der **Zeitreihen-Prognose-Linie** der "Konzepte"-Reihe im Portfolio von [Sebastian Hanisch](https://sebastianhanisch.net) – Operations Research und Machine Learning. Der **Zusammenfluss** der Verfahren aus den Stücken 1, 2, 4 und 6 ([Naive Prognose](https://github.com/sebastian-hanisch/naive-forecast-demo), [Exponentielle Glättung](https://github.com/sebastian-hanisch/exponential-smoothing-demo),
 [Dynamische Regression](https://github.com/sebastian-hanisch/dynamic-regression-demo), [Boosting](https://github.com/sebastian-hanisch/boosting-forecast-demo)). Geplant sind zwei weitere Stücke (Prognose → Bestand, ein vortrainiertes Netz; noch nicht gebaut).
 
