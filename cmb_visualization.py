@@ -48,14 +48,15 @@ def build_series(a, dep, origin, shown):
 
 
 def build_mase(a):
-    """MASE der Mitglieder und der Kombinationen; Linien: bestes Mitglied im Nachhinein (insgesamt) und bestes Mitglied je Depot im Nachhinein."""
+    """MASE der Mitglieder und der Kombinationen; Linien (mit Legende statt Beschriftung im Diagramm): bestes Mitglied im Nachhinein und bestes Mitglied je Depot im Nachhinein."""
     names = list(a.members) + list(a.forecasts)
     vals = [a.summary[k] for k in names]
-    fig = go.Figure(go.Bar(x=[SHORT[k] for k in names], y=vals, marker=dict(color=[COLORS[k] for k in names]), text=[de(v) for v in vals], textposition="outside", showlegend=False))
-    fig.add_hline(y=a.summary[a.best_member], line=dict(color="#7f7f7f", dash="dash"), annotation_text=f"bestes Mitglied im Nachhinein: {SHORT[a.best_member]}", annotation_position="top left")
-    fig.add_hline(y=a.oracle_depot, line=dict(color="#54a24b", dash="dot"), annotation_text="bestes Mitglied je Depot im Nachhinein", annotation_position="bottom left")
-    fig.update_yaxes(title_text="MASE (kleiner ist besser)", rangemode="tozero")
-    return _base(fig, 380)
+    labels = [SHORT[k] for k in names]
+    fig = go.Figure(go.Bar(x=labels, y=vals, marker=dict(color=[COLORS[k] for k in names]), text=[de(v) for v in vals], textposition="inside", insidetextanchor="start", textfont=dict(color="white", size=12), showlegend=False))
+    for y, name, color, dash in ((a.summary[a.best_member], f"bestes Mitglied im Nachhinein: {SHORT[a.best_member]}", "#7f7f7f", "dash"), (a.oracle_depot, "bestes Mitglied je Depot im Nachhinein", "#54a24b", "dot")):
+        fig.add_trace(go.Scatter(x=[labels[0], labels[-1]], y=[y, y], mode="lines", name=name, line=dict(color=color, dash=dash, width=2), hovertemplate=name + ": %{y:.3f}<extra></extra>"))
+    fig.update_yaxes(title_text="MASE (kleiner ist besser)", rangemode="tozero", range=[0, max(vals) * 1.08])
+    return _base(fig, 400)
 
 
 def build_best_counts(a):
